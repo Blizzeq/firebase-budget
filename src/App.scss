@@ -1,0 +1,105 @@
+@font-face {
+  font-family: 'Cera Pro Black';
+  src: url('./assets/cera pro font/Cera Pro Black.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Cera Pro Black Italic';
+  src: url('./assets/cera pro font/Cera Pro Black Italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Cera Pro Bold';
+  src: url('./assets/cera pro font/Cera Pro Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Cera Pro Light';
+  src: url('./assets/cera pro font/Cera Pro Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Cera Pro Medium';
+  src: url('./assets/cera pro font/Cera Pro Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Cera Pro Regular Italic';
+  src: url('./assets/cera pro font/Cera Pro Regular Italic.ttf') format('truetype');
+}
+
+$dark_color: #262626;
+$light_color: #FBFBFB;
+$main_color: #B23CFD;
+
+body{
+  background-color: $dark_color;
+  color: $light_color;
+}
+
+.navbar{
+  font-family: 'Cera Pro Medium', serif;
+  box-shadow: 0 0 5px 0 $main_color;
+  min-height: 7vh;
+}
+
+.Home-Container {
+  .Home-Title {
+    font-family: 'Cera Pro Bold', serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: 15vh;
+    margin-inline: 10vw;
+  }
+
+  .Home-Subtitle {
+    font-family: 'Cera Pro Regular Italic', serif;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 5vh;
+  }
+
+  .Home-Text {
+    font-family: 'Cera Pro Medium', serif;
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 12vh;
+  }
+
+  .Home-Login-Button {
+    display: flex;
+    justify-content: center;
+    margin-top: 2vh;
+    font-family: 'Cera Pro Medium', serif;
+
+    .btn {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+.Register-Container {
+  font-family: 'Cera Pro Medium', serif;
+  min-height: 73vh;
+  margin-inline: 5vw;
+  color: $dark_color;
+  .card{
+    margin-top: 20vh;
+    background-color: $light_color;
+    box-shadow: 0 0 5px 0 $main_color;
+  }
+}
+
+  .Login-Container{
+    font-family: 'Cera Pro Medium', serif;
+    min-height: 73vh;
+    margin-inline: 5vw;
+      color: $dark_color;
+      .card{
+        margin-top: 20vh;
+        background-color: $light_color;
+        box-shadow: 0 0 5px 0 $main_color;
+      }
+  }
+
+
