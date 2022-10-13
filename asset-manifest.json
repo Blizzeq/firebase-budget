@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/Blizzeq.github.io/firebase-budget/static/css/main.74ce0c5a.css",
-    "main.js": "/Blizzeq.github.io/firebase-budget/static/js/main.e5a0073d.js",
-    "static/media/Cera Pro Regular Italic.ttf": "/Blizzeq.github.io/firebase-budget/static/media/Cera Pro Regular Italic.b5c42576e233989a850b.ttf",
-    "static/media/Cera Pro Black Italic.ttf": "/Blizzeq.github.io/firebase-budget/static/media/Cera Pro Black Italic.1757411ceed8833b400e.ttf",
-    "static/media/Cera Pro Light.ttf": "/Blizzeq.github.io/firebase-budget/static/media/Cera Pro Light.bfbcb82e3e30fbc3248c.ttf",
-    "static/media/Cera Pro Medium.ttf": "/Blizzeq.github.io/firebase-budget/static/media/Cera Pro Medium.cb632ad5a39b32c06dc2.ttf",
-    "static/media/Cera Pro Bold.ttf": "/Blizzeq.github.io/firebase-budget/static/media/Cera Pro Bold.91144f02ac846713d450.ttf",
-    "static/media/Cera Pro Black.ttf": "/Blizzeq.github.io/firebase-budget/static/media/Cera Pro Black.80865afbabc037d46187.ttf",
-    "index.html": "/Blizzeq.github.io/firebase-budget/index.html",
-    "main.74ce0c5a.css.map": "/Blizzeq.github.io/firebase-budget/static/css/main.74ce0c5a.css.map",
-    "main.e5a0073d.js.map": "/Blizzeq.github.io/firebase-budget/static/js/main.e5a0073d.js.map"
+    "main.css": "/firebase-budget/static/css/main.cb5d0779.css",
+    "main.js": "/firebase-budget/static/js/main.72874614.js",
+    "static/media/Cera Pro Regular Italic.ttf": "/firebase-budget/static/media/Cera Pro Regular Italic.b5c42576e233989a850b.ttf",
+    "static/media/Cera Pro Black Italic.ttf": "/firebase-budget/static/media/Cera Pro Black Italic.1757411ceed8833b400e.ttf",
+    "static/media/Cera Pro Light.ttf": "/firebase-budget/static/media/Cera Pro Light.bfbcb82e3e30fbc3248c.ttf",
+    "static/media/Cera Pro Medium.ttf": "/firebase-budget/static/media/Cera Pro Medium.cb632ad5a39b32c06dc2.ttf",
+    "static/media/Cera Pro Bold.ttf": "/firebase-budget/static/media/Cera Pro Bold.91144f02ac846713d450.ttf",
+    "static/media/Cera Pro Black.ttf": "/firebase-budget/static/media/Cera Pro Black.80865afbabc037d46187.ttf",
+    "index.html": "/firebase-budget/index.html",
+    "main.cb5d0779.css.map": "/firebase-budget/static/css/main.cb5d0779.css.map",
+    "main.72874614.js.map": "/firebase-budget/static/js/main.72874614.js.map"
   },
   "entrypoints": [
-    "static/css/main.74ce0c5a.css",
-    "static/js/main.e5a0073d.js"
+    "static/css/main.cb5d0779.css",
+    "static/js/main.72874614.js"
   ]
 }
