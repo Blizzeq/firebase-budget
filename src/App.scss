@@ -37,18 +37,16 @@ body{
   color: $light_color;
 }
 
-.navbar{
-  font-family: 'Cera Pro Medium', serif;
-  box-shadow: 0 0 5px 0 $main_color;
-  min-height: 7vh;
-}
 
 .Home-Container {
+
+  min-height: 100vh;
+
   .Home-Title {
     font-family: 'Cera Pro Bold', serif;
     font-size: 2.5rem;
     text-align: center;
-    margin-top: 15vh;
+    padding-top: 20vh;
     margin-inline: 10vw;
   }
 
@@ -79,27 +77,64 @@ body{
 }
 
 .Register-Container {
+  min-height: 100vh;
   font-family: 'Cera Pro Medium', serif;
-  min-height: 73vh;
   margin-inline: 5vw;
-  color: $dark_color;
+  padding-top: 30vh;
   .card{
-    margin-top: 20vh;
     background-color: $light_color;
-    box-shadow: 0 0 5px 0 $main_color;
+  }
+  .Form-Contact{
+    margin-block: 1.75rem;
+    margin-inline: 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+    a{
+      text-decoration: none;
+      color: $main_color;
+      text-align: center;
+    }
+    p{
+      text-align: center;
+      color: $dark_color;
+      margin: 0;
+    }
+    .Button-Login{
+      margin-inline: auto;
+      color: $light_color;
+    }
   }
 }
 
   .Login-Container{
+    min-height: 100vh;
     font-family: 'Cera Pro Medium', serif;
-    min-height: 73vh;
     margin-inline: 5vw;
-      color: $dark_color;
-      .card{
-        margin-top: 20vh;
-        background-color: $light_color;
-        box-shadow: 0 0 5px 0 $main_color;
+    padding-top: 30vh;
+    .card{
+      background-color: $light_color;
+    }
+    .Form-Contact{
+      margin-block: 1.75rem;
+      margin-inline: 2rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-gap: 1rem;
+      a{
+        text-decoration: none;
+        color: $main_color;
+        text-align: center;
       }
+      p{
+        text-align: center;
+        color: $dark_color;
+        margin: 0;
+      }
+      .Button-Login, .Button-Register{
+        margin-inline: auto;
+      }
+    }
   }
 
 
