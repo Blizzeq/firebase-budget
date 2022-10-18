@@ -1,7 +1,7 @@
-import {MDBBtn, MDBCard, MDBCardBody,MDBInput} from "mdb-react-ui-kit";
+import {MDBCard} from "mdb-react-ui-kit";
 import React, {useEffect, useRef, useState} from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {
     auth, logInWithEmailAndPassword,
     registerWithEmailAndPassword, signInWithGoogle,
@@ -9,7 +9,7 @@ import {
 import {Button, Form} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
 
-function RegisterScreen(props) {
+function RegisterScreen() {
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");

@@ -10,7 +10,7 @@ import {updateBudget} from "./Database-Components/UpdateBudget";
 import {Button} from "react-bootstrap";
 
 
-function Dashboard(props) {
+function Dashboard() {
 
     const [user, loading] = useAuthState(auth);
     const [name, setName] = useState("");
@@ -35,6 +35,11 @@ function Dashboard(props) {
         <div className={"Dashboard"}>
             <div className={"Dashboard-Header"}>
                 {name} <Button variant={"secondary"} onClick={() => logout()}>Logout</Button>
+            </div>
+            <div className={"Dashboard-Body"}>
+                <div className={"Dashboard-AddBudget"}>
+                    <Button variant={"success"}>+</Button> <span>Add new Budget</span>
+                </div>
             </div>
         </div>
     );

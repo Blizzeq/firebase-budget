@@ -146,6 +146,23 @@ body{
         margin: 1rem;
         align-items: center;
     }
+    .Dashboard-Body{
+      .Dashboard-AddBudget{
+        margin-block: 3rem;
+        margin-left: 5vw;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        gap: 2rem;
+        font-family: 'Cera Pro Bold', serif;
+        font-size: 1.5rem;
+        .btn{
+          border-radius: 100%;
+          font-size: 1.5rem;
+          padding: 0.5rem 1.25rem;
+        }
+      }
+    }
   }
 
 

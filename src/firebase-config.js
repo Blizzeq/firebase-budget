@@ -48,9 +48,6 @@ const fetchDataToDB = async (user) => {
                 email: user.email,
             });
         }
-        else {
-            console.log("User already exists");
-        }
     } catch (err) {
         console.error(err);
         alert(err.message);

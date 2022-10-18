@@ -2,7 +2,7 @@ import React from 'react';
 import {MDBBtn} from "mdb-react-ui-kit";
 import {LinkContainer} from "react-router-bootstrap";
 
-function HomePage(props) {
+function HomePage() {
     return (
         <div className={"Home-Container"}>
             <div className={"Home-Title"}>
