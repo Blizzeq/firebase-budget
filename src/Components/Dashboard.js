@@ -3,6 +3,7 @@ import {useAuthState} from "react-firebase-hooks/auth";
 import {useNavigate} from "react-router-dom";
 import {auth, db, logout} from "../firebase-config";
 import {query, collection, getDocs, where, updateDoc, addDoc, deleteDoc} from "firebase/firestore";
+import {uuid} from "uuidv4";
 
 
 
@@ -27,6 +28,8 @@ function Dashboard(props) {
             setName(data.name);
         } catch (err) {
             setName(user.displayName);
+            console.error(err);
+            console.log("Error fetching user name");
         }
     };
 
@@ -39,13 +42,14 @@ function Dashboard(props) {
             const budgetNames = data.map(budget => budget.name);
             await addDoc(collection(db, "users", doc.docs[0].id, "budgets"), {
                 uid: user.uid,
+                budgetId: uuid(),
                 name: budgetName,
                 amount: budgetAmount,
             });
             setBudgets([...budgets, {name: budgetName, amount: budgetAmount}]);
         } catch (err) {
             console.error(err);
-            alert(err.message);
+            console.log("Error creating budget");
         }
     };
 
@@ -55,9 +59,10 @@ function Dashboard(props) {
             const doc = await getDocs(q);
             const querySnapshot = await getDocs(collection(db, "users", doc.docs[0].id, "budgets"));
             const data = querySnapshot.docs.map(doc => doc.data());
-            setBudgets(data.map(budget => ({name: budget.name, amount: budget.amount})));
+            setBudgets(data.map(budget => ({name: budget.name, amount: budget.amount, budgetId: budget.budgetId})));
         } catch (err) {
             console.error(err);
+            console.log("Error fetching budgets");
         }
     }
 
@@ -70,8 +75,10 @@ function Dashboard(props) {
             const budget = data.find(budget => budget.name === budgetName);
             const budgetDoc = querySnapshot.docs.find(doc => doc.data().name === budgetName);
             await updateDoc(budgetDoc.ref, {amount: budget.amount + budgetChange});
+            fetchBudgets();
         } catch (err) {
-
+            console.error(err);
+            console.log("Error updating budget");
         }
     };
 
@@ -82,8 +89,10 @@ function Dashboard(props) {
             const querySnapshot = await getDocs(collection(db, "users", doc.docs[0].id, "budgets"));
             const budgetDoc = querySnapshot.docs.find(doc => doc.data().name === budgetName);
             await deleteDoc(budgetDoc.ref);
+            fetchBudgets();
         } catch (err) {
-
+            console.error(err);
+            console.log("Error deleting budget");
         }
     }
 
@@ -94,7 +103,7 @@ function Dashboard(props) {
         fetchUserName();
         fetchBudgets();
 
-    }, [user, loading, updateBudget(), deleteBudget()]);
+    }, [user, loading]);
 
 
     return (
@@ -111,7 +120,7 @@ function Dashboard(props) {
                     Logout
                 </button>
                 <div>{budgets.map((budget) => {
-                    return <div>{budget.key} {budget.name} - {budget.amount}</div>
+                    return <div>{budget.budgetId} {budget.name} - {budget.amount}</div>
                 })}</div>
                 <input type="text" placeholder="Budget Name" onChange={(e) => setBudgetName(e.target.value)}/>
                 <input type="number" placeholder="Budget Amount"

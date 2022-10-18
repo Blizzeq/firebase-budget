@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs you need
 import Alert from 'react-bootstrap/Alert';
 import {initializeApp} from "firebase/app";
-import {getAnalytics} from "firebase/analytics";
 import {
     GoogleAuthProvider,
     getAuth,
@@ -25,18 +24,16 @@ import {
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyCq5YOtkPa7J5QhVDmgJKtsjW6zzqAAGMU",
-    authDomain: "budget-app-78a0d.firebaseapp.com",
-    projectId: "budget-app-78a0d",
-    storageBucket: "budget-app-78a0d.appspot.com",
-    messagingSenderId: "123953967988",
-    appId: "1:123953967988:web:0b37cea7f0db0c0ae93221",
-    measurementId: "G-H6R0K5RLKL"
+    apiKey: "AIzaSyAJrzoR3lqcLUdiU4OxLOuoAJvGrMN8lrI",
+    authDomain: "fir-budget-3e406.firebaseapp.com",
+    projectId: "fir-budget-3e406",
+    storageBucket: "fir-budget-3e406.appspot.com",
+    messagingSenderId: "537847221464",
+    appId: "1:537847221464:web:089f77ce94d86bd2975bad"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const auth = getAuth();
 const db = getFirestore();
 
