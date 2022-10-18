@@ -1,14 +1,10 @@
 import React, {useEffect, useRef, useState} from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 import {
-    MDBCard,
-    MDBCardBody,
-    MDBBtn,
-    MDBInput,
-    MDBIcon
+    MDBCard
 } from 'mdb-react-ui-kit';
 import {LinkContainer} from "react-router-bootstrap";
 import {Button, Form} from "react-bootstrap";
@@ -17,7 +13,7 @@ const LoginScreen = () =>  {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [user, loading, error] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
     const navigate = useNavigate();
     useEffect(() => {
         if (loading) {

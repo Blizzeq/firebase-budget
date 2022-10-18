@@ -1,7 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import {auth, logInWithEmailAndPassword, sendPasswordReset, signInWithGoogle} from "../firebase-config";
 import {Button, Form} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";

@@ -137,4 +137,15 @@ body{
     }
   }
 
+  .Dashboard{
+    .Dashboard-Header{
+      //display on right
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+        margin: 1rem;
+        align-items: center;
+    }
+  }
+
 

@@ -1,5 +1,4 @@
 // Import the functions you need from the SDKs you need
-import Alert from 'react-bootstrap/Alert';
 import {initializeApp} from "firebase/app";
 import {
     GoogleAuthProvider,
@@ -37,11 +36,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore();
 
-const googleProvider = new GoogleAuthProvider();
-const signInWithGoogle = async () => {
-    try {
-        const res = await signInWithRedirect(auth, googleProvider);
-        const user = res.user;
+const fetchDataToDB = async (user) => {
+    try{
         const q = query(collection(db, "users"), where("uid", "==", user.uid));
         const docs = await getDocs(q);
         if (docs.docs.length === 0) {
@@ -52,11 +48,25 @@ const signInWithGoogle = async () => {
                 email: user.email,
             });
         }
+        else {
+            console.log("User already exists");
+        }
     } catch (err) {
         console.error(err);
         alert(err.message);
     }
 };
+
+const googleProvider = new GoogleAuthProvider();
+const signInWithGoogle = async () => {
+    try {
+        await signInWithRedirect(auth, googleProvider);
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
+};
+
 const logInWithEmailAndPassword = async (email, password) => {
     try {
         await signInWithEmailAndPassword(auth, email, password);
@@ -83,7 +93,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
 const sendPasswordReset = async (email) => {
     try {
         await sendPasswordResetEmail(auth, email);
-        alert(<Alert variant="success">Password reset email sent</Alert>);
+        alert("Password reset email sent");
 
     } catch (err) {
         console.error(err);
@@ -101,4 +111,5 @@ export {
     registerWithEmailAndPassword,
     sendPasswordReset,
     logout,
+    fetchDataToDB
 };
