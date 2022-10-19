@@ -32,7 +32,7 @@ $dark_color: #262626;
 $light_color: #FBFBFB;
 $main_color: #B23CFD;
 
-body{
+body {
   background-color: $dark_color;
   color: $light_color;
 }
@@ -81,88 +81,183 @@ body{
   font-family: 'Cera Pro Medium', serif;
   margin-inline: 5vw;
   padding-top: 30vh;
-  .card{
+
+  .card {
     background-color: $light_color;
   }
-  .Form-Contact{
+
+  .Form-Contact {
     margin-block: 1.75rem;
     margin-inline: 2rem;
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 1rem;
-    a{
+
+    a {
       text-decoration: none;
       color: $main_color;
       text-align: center;
     }
-    p{
+
+    p {
       text-align: center;
       color: $dark_color;
       margin: 0;
     }
-    .Button-Login{
+
+    .Button-Login {
       margin-inline: auto;
       color: $light_color;
     }
   }
 }
 
-  .Login-Container{
-    min-height: 100vh;
-    font-family: 'Cera Pro Medium', serif;
-    margin-inline: 5vw;
-    padding-top: 30vh;
-    .card{
-      background-color: $light_color;
-    }
-    .Form-Contact{
-      margin-block: 1.75rem;
-      margin-inline: 2rem;
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-gap: 1rem;
-      a{
-        text-decoration: none;
-        color: $main_color;
-        text-align: center;
-      }
-      p{
-        text-align: center;
-        color: $dark_color;
-        margin: 0;
-      }
-      .Button-Login, .Button-Register{
-        margin-inline: auto;
-      }
-    }
+.Login-Container {
+  min-height: 100vh;
+  font-family: 'Cera Pro Medium', serif;
+  margin-inline: 5vw;
+  padding-top: 30vh;
+
+  .card {
+    background-color: $light_color;
   }
 
-  .Dashboard{
-    .Dashboard-Header{
-      //display on right
-        display: flex;
-        justify-content: flex-end;
-        gap: 1rem;
-        margin: 1rem;
-        align-items: center;
+  .Form-Contact {
+    margin-block: 1.75rem;
+    margin-inline: 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+
+    a {
+      text-decoration: none;
+      color: $main_color;
+      text-align: center;
     }
-    .Dashboard-Body{
-      .Dashboard-AddBudget{
-        margin-block: 3rem;
-        margin-left: 5vw;
-        display: flex;
-        justify-content: start;
-        align-items: center;
-        gap: 2rem;
-        font-family: 'Cera Pro Bold', serif;
+
+    p {
+      text-align: center;
+      color: $dark_color;
+      margin: 0;
+    }
+
+    .Button-Login, .Button-Register {
+      margin-inline: auto;
+    }
+  }
+}
+
+%Dashboard-Budget {
+  margin-block: 3rem;
+  margin-left: 5vw;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 2rem;
+  font-family: 'Cera Pro Bold', serif;
+  font-size: 1.5rem;
+}
+
+
+.Dashboard {
+  .Dashboard-Header {
+    //display on right
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin: 1rem;
+    align-items: center;
+    font-family: 'Cera Pro Medium', serif;
+  }
+
+  .Dashboard-Body {
+    .Dashboard-AddBudget {
+      @extend %Dashboard-Budget;
+
+      .btn {
+        border-radius: 100%;
         font-size: 1.5rem;
-        .btn{
-          border-radius: 100%;
-          font-size: 1.5rem;
-          padding: 0.5rem 1.25rem;
+        padding: 0.5rem 1.25rem;
+      }
+    }
+
+    .Dashboard-AddBudget-Form {
+      font-family: 'Cera Pro Medium', serif;
+      margin-top: 3rem;
+      margin-inline: 5vw;
+      color: $dark_color;
+
+      .card {
+        background-color: $light_color;
+        padding: 2rem;
+
+        .createBudgetForm {
+          .form-floating {
+            font-family: 'Cera Pro Regular Italic', serif;
+            margin-bottom: 2rem;
+          }
+        }
+
+        %btn {
+          margin-top: .5rem;
+          font-size: 1rem;
+        }
+
+        .btn-submit {
+          @extend %btn;
+        }
+
+        .btn-cancel {
+          @extend %btn;
+          margin-left: 1.82rem;
         }
       }
     }
+
+    .Dashboard-DeleteBudget {
+      @extend %Dashboard-Budget;
+
+      .btn {
+        border-radius: 100%;
+        font-size: 1.5rem;
+        padding: 0.5rem 1.41rem;
+      }
+    }
+
+    .Dashboard-DeleteBudget-Form {
+      font-family: 'Cera Pro Medium', serif;
+      margin-top: 3rem;
+      margin-inline: 5vw;
+      color: $dark_color;
+    }
+
+    .card {
+      background-color: $light_color;
+      padding: 2rem;
+
+      .deleteBudgetForm {
+        .form-select {
+          font-family: 'Cera Pro Regular Italic', serif;
+          margin-bottom: .5rem;
+        }
+      }
+
+      %btn {
+        margin-top: .5rem;
+        font-size: 1rem;
+      }
+
+      .btn-delete {
+        @extend %btn;
+      }
+
+      .btn-cancel {
+        @extend %btn;
+        margin-left: 0.37rem;
+      }
+    }
   }
+}
+
 
 

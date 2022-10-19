@@ -8,6 +8,8 @@ import {createBudget} from "./Database-Components/CreateBudget";
 import {deleteBudget} from "./Database-Components/DeleteBudget";
 import {updateBudget} from "./Database-Components/UpdateBudget";
 import {Button} from "react-bootstrap";
+import AddBudgetForm from "./AddBudgetForm";
+import DeleteBudgetForm from "./DeleteBudgetForm";
 
 
 function Dashboard() {
@@ -18,6 +20,8 @@ function Dashboard() {
     const [budgetName, setBudgetName] = useState("");
     const [budgetAmount, setBudgetAmount] = useState(0);
     const [budgetChange, setBudgetChange] = useState(0);
+    const [addBudget, setAddBudget] = useState(false);
+    const [delBudget, setDelBudget] = useState(false);
 
     const [budgets, setBudgets] = useState([]);
 
@@ -28,7 +32,7 @@ function Dashboard() {
         fetchUserName(user, setName);
         fetchBudgets(user, setBudgets);
 
-    }, [user, loading,navigate]);
+    }, [user, loading, navigate]);
 
 
     return (
@@ -37,9 +41,19 @@ function Dashboard() {
                 {name} <Button variant={"secondary"} onClick={() => logout()}>Logout</Button>
             </div>
             <div className={"Dashboard-Body"}>
-                <div className={"Dashboard-AddBudget"}>
-                    <Button variant={"success"}>+</Button> <span>Add new Budget</span>
-                </div>
+                {addBudget ?
+                    <AddBudgetForm addBudget={addBudget} setAddBudget={setAddBudget} user={user} budgetName={budgetName}
+                                   setBudgetName={setBudgetName} budgetAmount={budgetAmount}
+                                   setBudgetAmount={setBudgetAmount} budgetChange={budgetChange}
+                                   setBudgetChange={setBudgetChange} createBudget={createBudget} setBudgets={setBudgets}
+                                   budgets={budgets}/>
+                    : <div className={"Dashboard-AddBudget"}>
+                        <Button variant={"success"} onClick={() => setAddBudget(!addBudget)}>+</Button> <span>Add new Budget</span>
+                    </div>}
+                {budgets.length !== 0 && [delBudget ? <DeleteBudgetForm delBudget={delBudget} setDelBudget={setDelBudget} user={user} budgets={budgets} setBudgets={setBudgets}/>
+                        : <div className={"Dashboard-DeleteBudget"}>
+                            <Button variant={"danger"} onClick={() => setDelBudget(!delBudget)}>-</Button> <span>Delete existing Budget</span>
+                        </div>]}
             </div>
         </div>
     );

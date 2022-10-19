@@ -2,8 +2,9 @@ import {addDoc, collection, getDocs, query, where} from "firebase/firestore";
 import {db} from "../../firebase-config";
 import {uuid} from "uuidv4";
 
-export const createBudget = async (user, budgetName, setBudgets, budgetAmount, budgets) => {
+export const createBudget = async (user, budgetName, setBudgets, budgetAmount, budgets, addBudget, setAddBudget) => {
     try {
+        setAddBudget(!addBudget);
         const q = query(collection(db, "users"), where("uid", "==", user?.uid));
         const doc = await getDocs(q);
         const querySnapshot = await getDocs(collection(db, "users", doc.docs[0].id, "budgets"));

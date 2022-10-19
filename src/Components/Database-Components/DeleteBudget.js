@@ -2,8 +2,9 @@ import {collection, deleteDoc, getDocs, query, where} from "firebase/firestore";
 import {db} from "../../firebase-config";
 import {fetchBudgets} from "./FetchBudgets";
 
-export const deleteBudget = async (user, budgetName, budgets, setBudgets) => {
+export const deleteBudget = async (user, budgetName, budgets, setBudgets, deleteBudget, setDeleteBudget) => {
     try {
+        setDeleteBudget(!deleteBudget);
         const q = query(collection(db, "users"), where("uid", "==", user?.uid));
         const doc = await getDocs(q);
         const querySnapshot = await getDocs(collection(db, "users", doc.docs[0].id, "budgets"));
