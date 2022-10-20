@@ -4,7 +4,7 @@ import {uuid} from "uuidv4";
 
 export const createBudget = async (user, budgetName, setBudgets, budgetAmount, budgets, addBudget, setAddBudget, category) => {
     try {
-        setAddBudget(!addBudget);
+        setAddBudget(false);
         const q = query(collection(db, "users"), where("uid", "==", user?.uid));
         const doc = await getDocs(q);
         const querySnapshot = await getDocs(collection(db, "users", doc.docs[0].id, "budgets"));

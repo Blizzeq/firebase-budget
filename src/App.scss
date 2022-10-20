@@ -170,7 +170,7 @@ body {
     font-family: 'Cera Pro Medium', serif;
   }
 
-  .Dashboard-Body {
+  .Dashboard-Menu {
     .Dashboard-AddBudget {
       @extend %Dashboard-Budget;
 
@@ -307,6 +307,21 @@ body {
         @extend %btn;
         margin-left: 1.8rem;
       }
+    }
+  }
+
+  .Dashboard-Budget{
+    color: $dark_color;
+
+    %teskt{
+      font-family: 'Cera Pro Medium', serif;
+      font-size: 1.5rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .Budget-Name, .Budget-Amount, .Budget-Category {
+      @extend %teskt;
     }
   }
 }

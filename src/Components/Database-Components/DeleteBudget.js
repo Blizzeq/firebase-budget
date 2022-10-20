@@ -4,7 +4,7 @@ import {fetchBudgets} from "./FetchBudgets";
 
 export const deleteBudget = async (user, budgetName, budgets, setBudgets, deleteBudget, setDeleteBudget) => {
     try {
-        setDeleteBudget(!deleteBudget);
+        setDeleteBudget(false);
         const q = query(collection(db, "users"), where("uid", "==", user?.uid));
         const doc = await getDocs(q);
         const querySnapshot = await getDocs(collection(db, "users", doc.docs[0].id, "budgets"));

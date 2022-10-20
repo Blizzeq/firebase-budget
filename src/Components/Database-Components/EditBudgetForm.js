@@ -18,8 +18,7 @@ function EditBudgetForm({user, budgets, setBudgets, budgetName, setBudgetName, e
             event.preventDefault();
             event.stopPropagation();
         } else {
-            updateBudget(user, budgetName, setBudgets, selectedCategory, budgetAmount, selectedBudget);
-            setEditBudget(false);
+            updateBudget(user, budgetName, setBudgets, selectedCategory, budgetAmount, selectedBudget, setEditBudget);
         }
         setValidated(true);
     };
@@ -36,6 +35,7 @@ function EditBudgetForm({user, budgets, setBudgets, budgetName, setBudgetName, e
                             <option key={key} id={budget.budgetId} value={budget.name}>{budget.name}</option>
                         ))}
                     </Form.Select>
+                    <p className={'edit-info'}>Edit budget name</p>
                     <FloatingLabel
                         controlId="floatingBudget"
                         label={selectedBudget}
@@ -49,6 +49,7 @@ function EditBudgetForm({user, budgets, setBudgets, budgetName, setBudgetName, e
                             Please provide a new name.
                         </Form.Control.Feedback>
                     </FloatingLabel>
+                    <p className={'edit-info'}>Select budget category</p>
                     <Form.Select aria-label="Default select example" onChange={(e) => setSelectedCategory(e.target.value)}>
                         <option>
                             {budgets.map((budget) => (
@@ -64,6 +65,7 @@ function EditBudgetForm({user, budgets, setBudgets, budgetName, setBudgetName, e
                         <option value={'Savings'}>Savings</option>
                         <option value={'Other'}>Other</option>
                     </Form.Select>
+                    <p className={'edit-info'}>Edit budget amount</p>
                     <FloatingLabel controlId="floatingAmount"
                                    label={budgets.map((budget) => (
                                       [budget.name === selectedBudget && budget.amount]

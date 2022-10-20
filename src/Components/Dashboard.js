@@ -11,6 +11,7 @@ import {Button} from "react-bootstrap";
 import AddBudgetForm from "./AddBudgetForm";
 import DeleteBudgetForm from "./DeleteBudgetForm";
 import EditBudgetForm from "./Database-Components/EditBudgetForm";
+import {MDBCard} from "mdb-react-ui-kit";
 
 
 function Dashboard() {
@@ -42,7 +43,7 @@ function Dashboard() {
             <div className={"Dashboard-Header"}>
                 {name} <Button variant={"secondary"} onClick={() => logout()}>Logout</Button>
             </div>
-            <div className={"Dashboard-Body"}>
+            <div className={"Dashboard-Menu"}>
                 {addBudget ?
                     <AddBudgetForm addBudget={addBudget} setAddBudget={setAddBudget} user={user} budgetName={budgetName}
                                    setBudgetName={setBudgetName} budgetAmount={budgetAmount}
@@ -61,6 +62,17 @@ function Dashboard() {
                         <Button variant={"warning"} onClick={() => setEditBudget(!editBudget)}>✎</Button> <span>Edit existing Budget</span>
                     </div>]}
             </div>
+            {budgets.length !== 0 &&
+                [budgets.map((budget, index) => {
+                    return <div className={"Dashboard-Budget"} key={index}>
+                        <MDBCard>
+                            <p className={'Budget-Name'}>{budget.name}</p>
+                            <p className={'Budget-Category'}>{budget.category}</p>
+                            <p className={'Budget-Amount'}>{budget.amount}</p>
+                        </MDBCard>
+                    </div>
+                })]
+            }
         </div>
     );
 }
