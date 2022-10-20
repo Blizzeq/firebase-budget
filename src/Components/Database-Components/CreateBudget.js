@@ -2,7 +2,7 @@ import {addDoc, collection, getDocs, query, where} from "firebase/firestore";
 import {db} from "../../firebase-config";
 import {uuid} from "uuidv4";
 
-export const createBudget = async (user, budgetName, setBudgets, budgetAmount, budgets, addBudget, setAddBudget) => {
+export const createBudget = async (user, budgetName, setBudgets, budgetAmount, budgets, addBudget, setAddBudget, category) => {
     try {
         setAddBudget(!addBudget);
         const q = query(collection(db, "users"), where("uid", "==", user?.uid));
@@ -15,6 +15,7 @@ export const createBudget = async (user, budgetName, setBudgets, budgetAmount, b
                 uid: user.uid,
                 budgetId: uuid(),
                 name: budgetName,
+                category: category,
                 amount: budgetAmount,
             });
             setBudgets([...budgets, {name: budgetName, amount: budgetAmount}]);

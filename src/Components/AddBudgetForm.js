@@ -6,13 +6,15 @@ import {createBudget} from "./Database-Components/CreateBudget";
 function AddBudgetForm({user, addBudget, setAddBudget, budgets, setBudgets, setBudgetName, setBudgetAmount, budgetName, budgetAmount}) {
     const [validated, setValidated] = useState(false);
 
+    const [selectedCategory, setSelectedCategory] = useState("Other");
+
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
         } else {
-            createBudget(user, budgetName, setBudgets, budgetAmount, budgets, addBudget, setAddBudget);
+            createBudget(user, budgetName, setBudgets, budgetAmount, budgets, addBudget, setAddBudget, selectedCategory);
         }
 
         setValidated(true);
@@ -35,6 +37,17 @@ function AddBudgetForm({user, addBudget, setAddBudget, budgets, setBudgets, setB
                             Please provide a name for your budget.
                         </Form.Control.Feedback>
                     </FloatingLabel>
+                    <Form.Select aria-label="Default select example" onChange={(e) => setSelectedCategory(e.target.value)}>
+                        <option>Select category</option>
+                        <option value={"Housing"}>Housing</option>
+                        <option value={"Transportation"}>Transportation</option>
+                        <option value={"Food"}>Food</option>
+                        <option value={"Utilities"}>Utilities</option>
+                        <option value={"Insurance"}>Insurance</option>
+                        <option value={"Medical/Dental"}>Medical/Dental</option>
+                        <option value={"Savings"}>Savings</option>
+                        <option value={"Other"}>Other</option>
+                    </Form.Select>
                     <FloatingLabel controlId="floatingAmount" label="Amount">
                         <Form.Control type="number" placeholder="Amount"
                                       onChange={(e) => setBudgetAmount(e.target.valueAsNumber)} required/>

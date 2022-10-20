@@ -7,7 +7,7 @@ export const fetchBudgets = async (user, setBudgets) => {
         const doc = await getDocs(q);
         const querySnapshot = await getDocs(collection(db, "users", doc.docs[0].id, "budgets"));
         const data = querySnapshot.docs.map(doc => doc.data());
-        setBudgets(data.map(budget => ({name: budget.name, amount: budget.amount, budgetId: budget.budgetId})));
+        setBudgets(data.map(budget => ({name: budget.name, amount: budget.amount, budgetId: budget.budgetId, category: budget.category})));
     } catch (err) {
         console.error(err);
         console.log("Error fetching budgets");

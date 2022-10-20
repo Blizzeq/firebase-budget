@@ -192,7 +192,7 @@ body {
         padding: 2rem;
 
         .createBudgetForm {
-          .form-floating {
+          .form-floating, .form-select {
             font-family: 'Cera Pro Regular Italic', serif;
             margin-bottom: 2rem;
           }
@@ -236,6 +236,10 @@ body {
       padding: 2rem;
 
       .deleteBudgetForm {
+        .delete-info{
+          font-family: 'Cera Pro Black Italic', serif;
+          font-size: 1.25rem;
+        }
         .form-select {
           font-family: 'Cera Pro Regular Italic', serif;
           margin-bottom: .5rem;
@@ -257,7 +261,54 @@ body {
       }
     }
   }
-}
 
+  .Dashboard-EditBudget {
+    @extend %Dashboard-Budget;
+
+    .btn {
+      border-radius: 100%;
+      font-size: 1.5rem;
+      padding: 0.5rem .92rem;
+    }
+  }
+
+  .Dashboard-EditBudget-Form {
+    font-family: 'Cera Pro Medium', serif;
+    margin-top: 3rem;
+    margin-inline: 5vw;
+    color: $dark_color;
+
+    .card {
+      background-color: $light_color;
+      padding: 2rem;
+    }
+
+    .editBudgetForm {
+
+      .edit-info{
+        font-family: 'Cera Pro Black Italic', serif;
+        font-size: 1.35rem;
+      }
+      .form-select, .form-floating {
+        font-family: 'Cera Pro Regular Italic', serif;
+        margin-bottom: 2rem;
+      }
+
+      %btn {
+        margin-top: .5rem;
+        font-size: 1rem;
+      }
+
+      .btn-edit {
+        @extend %btn;
+      }
+
+      .btn-cancel {
+        @extend %btn;
+        margin-left: 1.8rem;
+      }
+    }
+  }
+}
 
 

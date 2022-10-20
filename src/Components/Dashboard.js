@@ -10,6 +10,7 @@ import {updateBudget} from "./Database-Components/UpdateBudget";
 import {Button} from "react-bootstrap";
 import AddBudgetForm from "./AddBudgetForm";
 import DeleteBudgetForm from "./DeleteBudgetForm";
+import EditBudgetForm from "./Database-Components/EditBudgetForm";
 
 
 function Dashboard() {
@@ -22,6 +23,7 @@ function Dashboard() {
     const [budgetChange, setBudgetChange] = useState(0);
     const [addBudget, setAddBudget] = useState(false);
     const [delBudget, setDelBudget] = useState(false);
+    const [editBudget, setEditBudget] = useState(false);
 
     const [budgets, setBudgets] = useState([]);
 
@@ -32,7 +34,7 @@ function Dashboard() {
         fetchUserName(user, setName);
         fetchBudgets(user, setBudgets);
 
-    }, [user, loading, navigate]);
+    }, [user, loading, navigate, budgets]);
 
 
     return (
@@ -54,6 +56,10 @@ function Dashboard() {
                         : <div className={"Dashboard-DeleteBudget"}>
                             <Button variant={"danger"} onClick={() => setDelBudget(!delBudget)}>-</Button> <span>Delete existing Budget</span>
                         </div>]}
+                {budgets.length !== 0 && [editBudget ? <EditBudgetForm user={user} budgets={budgets} setBudgets={setBudgets} budgetName={budgetName} setBudgetName={setBudgetName} editBudget={editBudget} setEditBudget={setEditBudget} budgetAmount={budgetAmount} setBudgetAmount={setBudgetAmount} />
+                : <div className={"Dashboard-EditBudget"}>
+                        <Button variant={"warning"} onClick={() => setEditBudget(!editBudget)}>✎</Button> <span>Edit existing Budget</span>
+                    </div>]}
             </div>
         </div>
     );
