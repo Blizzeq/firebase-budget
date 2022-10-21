@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/firebase-budget/static/css/main.d49dc750.chunk.css",
-    "main.js": "/firebase-budget/static/js/main.79976daa.chunk.js",
-    "main.js.map": "/firebase-budget/static/js/main.79976daa.chunk.js.map",
+    "main.js": "/firebase-budget/static/js/main.a4634b5e.chunk.js",
+    "main.js.map": "/firebase-budget/static/js/main.a4634b5e.chunk.js.map",
     "runtime-main.js": "/firebase-budget/static/js/runtime-main.e822f921.js",
     "runtime-main.js.map": "/firebase-budget/static/js/runtime-main.e822f921.js.map",
     "static/css/2.e308dff4.chunk.css": "/firebase-budget/static/css/2.e308dff4.chunk.css",
@@ -19,6 +19,6 @@
     "static/css/2.e308dff4.chunk.css",
     "static/js/2.d84e579b.chunk.js",
     "static/css/main.d49dc750.chunk.css",
-    "static/js/main.79976daa.chunk.js"
+    "static/js/main.a4634b5e.chunk.js"
   ]
 }
