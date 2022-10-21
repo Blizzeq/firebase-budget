@@ -13,7 +13,9 @@ function EditBudgetForm({
                             editBudget,
                             setEditBudget,
                             budgetAmount,
-                            setBudgetAmount
+                            setBudgetAmount,
+                            totalBudget,
+                            setTotalBudget
                         }) {
 
     const [validated, setValidated] = useState(false);
@@ -26,12 +28,15 @@ function EditBudgetForm({
 
     const [editBudgetAmount, setEditBudgetAmount] = useState(budgets[0].amount);
 
+    const [editTotalBudget, setEditTotalBudget] = useState(budgets[0].totalBudget);
+
 
     const handleEmptyForm = () => {
             budgets.map((budget) => {
                 if (budget.name === selectedBudget) {
                     setEditBudgetName(budget.name);
                     setEditBudgetAmount(budget.amount);
+                    setEditTotalBudget(budget.totalBudget);
                 }
 
                 return null;
@@ -50,8 +55,15 @@ function EditBudgetForm({
 
             if(budgetAmount === 0){
                 setBudgetAmount(editBudgetAmount);
+            }else if(budgetAmount > editTotalBudget) {
+                setBudgetAmount(editTotalBudget);
             }
-            updateBudget(user, budgetName, setBudgets, selectedCategory, budgetAmount, selectedBudget, setEditBudget);
+
+            if(totalBudget === 0){
+                setTotalBudget(editTotalBudget);
+            }
+
+            updateBudget(user, budgetName, setBudgets, selectedCategory, budgetAmount, selectedBudget, setEditBudget, totalBudget);
         }
         setValidated(true);
     };
@@ -103,7 +115,7 @@ function EditBudgetForm({
                         <option value={'Savings'}>Savings</option>
                         <option value={'Other'}>Other</option>
                     </Form.Select>
-                    <p className={'edit-info'}>Edit budget amount</p>
+                    <p className={'edit-info'}>Edit current budget amount</p>
                     <FloatingLabel controlId="floatingAmount"
                                    label={budgets.map((budget) => (
                                        [budget.name === selectedBudget && budget.amount]
@@ -111,6 +123,21 @@ function EditBudgetForm({
                     >
                         <Form.Control type="number" placeholder="Amount"
                                       onChange={(e) => setBudgetAmount(e.target.valueAsNumber)}/>
+                        <Form.Control.Feedback>
+                            Looks good!
+                        </Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid">
+                            Please provide a new amount.
+                        </Form.Control.Feedback>
+                    </FloatingLabel>
+                    <p className={'edit-info'}>Edit maximum budget amount</p>
+                    <FloatingLabel controlId="floatingAmount"
+                                   label={budgets.map((budget) => (
+                                       [budget.name === selectedBudget && budget.totalBudget]
+                                   ))}
+                    >
+                        <Form.Control type="number" placeholder="Amount"
+                                      onChange={(e) => setTotalBudget(e.target.valueAsNumber)}/>
                         <Form.Control.Feedback>
                             Looks good!
                         </Form.Control.Feedback>

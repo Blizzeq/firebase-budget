@@ -2,7 +2,7 @@ import {collection, getDocs, query, updateDoc, where} from "firebase/firestore";
 import {db} from "../../firebase-config";
 import {fetchBudgets} from "./FetchBudgets";
 
-export const updateBudget = async (user, budgetName, setBudgets, category, budgetAmount, selectedBudget, setEditBudget) => {
+export const updateBudget = async (user, budgetName, setBudgets, category, budgetAmount, selectedBudget, setEditBudget, totalBudget) => {
     try {
         setEditBudget(false);
         const q = query(collection(db, "users"), where("uid", "==", user?.uid));
@@ -12,7 +12,8 @@ export const updateBudget = async (user, budgetName, setBudgets, category, budge
         await updateDoc(budgetDoc.ref, {
             name: budgetName,
             amount: budgetAmount,
-            category: category
+            category: category,
+            totalBudget: totalBudget
         });
         await fetchBudgets(user, setBudgets);
     } catch (err) {

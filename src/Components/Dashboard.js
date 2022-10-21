@@ -9,6 +9,7 @@ import AddBudgetForm from "./AddBudgetForm";
 import DeleteBudgetForm from "./DeleteBudgetForm";
 import EditBudgetForm from "./EditBudgetForm";
 import {MDBCard} from "mdb-react-ui-kit";
+import Summary from "./Summary";
 
 
 function Dashboard() {
@@ -18,6 +19,7 @@ function Dashboard() {
     const navigate = useNavigate();
     const [budgetName, setBudgetName] = useState("");
     const [budgetAmount, setBudgetAmount] = useState(0);
+    const [totalBudget, setTotalBudget] = useState(0);
     const [addBudget, setAddBudget] = useState(false);
     const [delBudget, setDelBudget] = useState(false);
     const [editBudget, setEditBudget] = useState(false);
@@ -30,8 +32,9 @@ function Dashboard() {
         fetchDataToDB(user);
         fetchUserName(user, setName);
         fetchBudgets(user, setBudgets);
+        console.log("WOW");
 
-    }, [user, loading, navigate, budgets]);
+    }, [user, loading, navigate]);
 
 
     return (
@@ -45,7 +48,7 @@ function Dashboard() {
                                    setBudgetName={setBudgetName} budgetAmount={budgetAmount}
                                    setBudgetAmount={setBudgetAmount}
                                    setBudgets={setBudgets}
-                                   budgets={budgets}/>
+                                   budgets={budgets} totalBudget={totalBudget} setTotalBudget={setTotalBudget}/>
                     : <div className={"Dashboard-AddBudget"}>
                         <Button variant={"success"} onClick={() => setAddBudget(!addBudget)}>+</Button> <span>Add new Budget</span>
                     </div>}
@@ -58,7 +61,8 @@ function Dashboard() {
                 {budgets.length !== 0 && [editBudget ?
                     <EditBudgetForm user={user} budgets={budgets} setBudgets={setBudgets} budgetName={budgetName}
                                     setBudgetName={setBudgetName} editBudget={editBudget} setEditBudget={setEditBudget}
-                                    budgetAmount={budgetAmount} setBudgetAmount={setBudgetAmount}/>
+                                    budgetAmount={budgetAmount} setBudgetAmount={setBudgetAmount} totalBudget={totalBudget}
+                                    setTotalBudget={setTotalBudget}/>
                     : <div className={"Dashboard-EditBudget"}>
                         <Button variant={"warning"} onClick={() => setEditBudget(!editBudget)}>✎</Button> <span>Edit existing Budget</span>
                     </div>]}
@@ -69,11 +73,12 @@ function Dashboard() {
                         <MDBCard>
                             <p className={'Budget-Name'}>{budget.name}</p>
                             <p className={'Budget-Category'}>{budget.category}</p>
-                            <p className={'Budget-Amount'}>{budget.amount}</p>
+                            <p className={'Budget-Amount'}>{budget.amount}/{budget.totalBudget}</p>
                         </MDBCard>
                     </div>
                 })]
             }
+            <Summary budgets={budgets}/>
         </div>
     );
 }

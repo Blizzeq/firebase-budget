@@ -187,6 +187,11 @@ body {
       margin-inline: 5vw;
       color: $dark_color;
 
+      .edit-info{
+        font-family: 'Cera Pro Black Italic', serif;
+        font-size: 1.35rem;
+      }
+
       .card {
         background-color: $light_color;
         padding: 2rem;
@@ -312,16 +317,29 @@ body {
 
   .Dashboard-Budget{
     color: $dark_color;
+    margin: 7vh 10vw;
+
+    .card{
+      background-color: $light_color;
+      padding: .5rem;
+      box-shadow: 0 0 10px 0 $main_color;
+    }
 
     %teskt{
-      font-family: 'Cera Pro Medium', serif;
+      font-family: 'Cera Pro Black', serif;
       font-size: 1.5rem;
       display: flex;
       justify-content: center;
     }
 
-    .Budget-Name, .Budget-Amount, .Budget-Category {
+    .Budget-Name {
       @extend %teskt;
+
+    }
+
+    .Budget-Amount, .Budget-Category {
+      @extend %teskt;
+      font-family: 'Cera Pro Medium', serif;
     }
   }
 }
