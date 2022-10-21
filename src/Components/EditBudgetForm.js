@@ -1,10 +1,20 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, FloatingLabel, Form} from "react-bootstrap";
-import {updateBudget} from "./UpdateBudget";
+import {updateBudget} from "./Database-Components/UpdateBudget";
 import {MDBCard} from "mdb-react-ui-kit";
 
 
-function EditBudgetForm({user, budgets, setBudgets, budgetName, setBudgetName, editBudget, setEditBudget, budgetAmount, setBudgetAmount}) {
+function EditBudgetForm({
+                            user,
+                            budgets,
+                            setBudgets,
+                            budgetName,
+                            setBudgetName,
+                            editBudget,
+                            setEditBudget,
+                            budgetAmount,
+                            setBudgetAmount
+                        }) {
 
     const [validated, setValidated] = useState(false);
 
@@ -12,16 +22,43 @@ function EditBudgetForm({user, budgets, setBudgets, budgetName, setBudgetName, e
 
     const [selectedCategory, setSelectedCategory] = useState(budgets[0].category);
 
+    const [editBudgetName, setEditBudgetName] = useState(budgets[0].name);
+
+    const [editBudgetAmount, setEditBudgetAmount] = useState(budgets[0].amount);
+
+
+    const handleEmptyForm = () => {
+            budgets.map((budget) => {
+                if (budget.name === selectedBudget) {
+                    setEditBudgetName(budget.name);
+                    setEditBudgetAmount(budget.amount);
+                }
+
+                return null;
+            })
+    }
+
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
         } else {
+            if(budgetName === ""){
+                setBudgetName(editBudgetName);
+            }
+
+            if(budgetAmount === 0){
+                setBudgetAmount(editBudgetAmount);
+            }
             updateBudget(user, budgetName, setBudgets, selectedCategory, budgetAmount, selectedBudget, setEditBudget);
         }
         setValidated(true);
     };
+
+    useEffect(() => {
+        handleEmptyForm();
+    }, [selectedBudget]);
 
 
     return (
@@ -41,7 +78,7 @@ function EditBudgetForm({user, budgets, setBudgets, budgetName, setBudgetName, e
                         label={selectedBudget}
                     >
                         <Form.Control type="text" placeholder="Budget"
-                                      onChange={(e) => setBudgetName(e.target.value)} required/>
+                                      onChange={(e) => setBudgetName(e.target.value)}/>
                         <Form.Control.Feedback>
                             Looks good!
                         </Form.Control.Feedback>
@@ -50,7 +87,8 @@ function EditBudgetForm({user, budgets, setBudgets, budgetName, setBudgetName, e
                         </Form.Control.Feedback>
                     </FloatingLabel>
                     <p className={'edit-info'}>Select budget category</p>
-                    <Form.Select aria-label="Default select example" onChange={(e) => setSelectedCategory(e.target.value)}>
+                    <Form.Select aria-label="Default select example"
+                                 onChange={(e) => setSelectedCategory(e.target.value)}>
                         <option>
                             {budgets.map((budget) => (
                                 [budget.name === selectedBudget && budget.category]
@@ -68,12 +106,11 @@ function EditBudgetForm({user, budgets, setBudgets, budgetName, setBudgetName, e
                     <p className={'edit-info'}>Edit budget amount</p>
                     <FloatingLabel controlId="floatingAmount"
                                    label={budgets.map((budget) => (
-                                      [budget.name === selectedBudget && budget.amount]
+                                       [budget.name === selectedBudget && budget.amount]
                                    ))}
                     >
                         <Form.Control type="number" placeholder="Amount"
-                                      onChange={(e) => setBudgetAmount(e.target.valueAsNumber)} required
-                        />
+                                      onChange={(e) => setBudgetAmount(e.target.valueAsNumber)}/>
                         <Form.Control.Feedback>
                             Looks good!
                         </Form.Control.Feedback>
