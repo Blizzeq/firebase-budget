@@ -8,8 +8,10 @@ import {
 } from 'mdb-react-ui-kit';
 import {LinkContainer} from "react-router-bootstrap";
 import {Button, Form} from "react-bootstrap";
+import LoadingScreen from "./LoadingScreen";
 
-const LoginScreen = () =>  {
+const LoginScreen = ({isLoading, setIsLoading}) =>  {
+
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -17,10 +19,17 @@ const LoginScreen = () =>  {
     const navigate = useNavigate();
     useEffect(() => {
         if (loading) {
-            // maybe trigger a loading screen
+            setIsLoading(true);
             return;
         }
-        if (user) navigate("/dashboard");
+
+        if(loading === false) {
+            setIsLoading(false);
+        }
+
+        if (user){
+            navigate("/dashboard")
+        }
     }, [user, loading, navigate]);
 
     const form = useRef();
@@ -40,39 +49,45 @@ const LoginScreen = () =>  {
         setValidated(true);
     };
 
+    console.log("Loading " + loading);
+
     return (
-        <div className={"Login-Container"}>
-            <MDBCard>
-                <Form noValidate validated={validated} ref={form} onSubmit={handleSubmit}
-                      className={'Form-Contact'}>
+        <>
+        {isLoading ? <LoadingScreen/> :
+                <div className={"Login-Container"}>
+                    <MDBCard>
+                        <Form noValidate validated={validated} ref={form} onSubmit={handleSubmit}
+                              className={'Form-Contact'}>
 
-                    <Form.Group className="form-content" controlId="formBasicEmail">
-                        <Form.Control required type="email" placeholder="Email" name="user_email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-                        <Form.Control.Feedback type="invalid">
-                            Please provide a valid email.
-                        </Form.Control.Feedback>
-                    </Form.Group>
+                            <Form.Group className="form-content" controlId="formBasicEmail">
+                                <Form.Control required type="email" placeholder="Email" name="user_email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                                <Form.Control.Feedback type="invalid">
+                                    Please provide a valid email.
+                                </Form.Control.Feedback>
+                            </Form.Group>
 
-                    <Form.Group className="form-content" controlId="formBasicPassword">
-                        <Form.Control required type="password" placeholder="Password" name="user_password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-                        <Form.Control.Feedback type="invalid">
-                            Please provide a valid password.
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                    <LinkContainer to="/reset">
-                    <a>Forgot password?</a>
-                    </LinkContainer>
-                    <Button variant="secondary" type="submit" className={'Button-Login'}>
-                        Login
-                    </Button>
-                    <p>Not a member? <LinkContainer to="/register"><a>Register</a></LinkContainer></p>
-                    <p>or sign up with:</p>
-                    <Button onClick={signInWithGoogle} className='Button-Register' variant={'secondary'}>
-                        Google
-                    </Button>
-                </Form>
-            </MDBCard>
-        </div>
+                            <Form.Group className="form-content" controlId="formBasicPassword">
+                                <Form.Control required type="password" placeholder="Password" name="user_password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                                <Form.Control.Feedback type="invalid">
+                                    Please provide a valid password.
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                            <LinkContainer to="/reset">
+                                <a>Forgot password?</a>
+                            </LinkContainer>
+                            <Button variant="secondary" type="submit" className={'Button-Login'}>
+                                Login
+                            </Button>
+                            <p>Not a member? <LinkContainer to="/register"><a>Register</a></LinkContainer></p>
+                            <p>or sign up with:</p>
+                            <Button onClick={signInWithGoogle} className='Button-Register' variant={'secondary'}>
+                                Google
+                            </Button>
+                        </Form>
+                    </MDBCard>
+                </div>
+        }
+        </>
     );
 }
 
