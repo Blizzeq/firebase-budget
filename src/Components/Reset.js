@@ -17,7 +17,7 @@ function Reset({isLoading, setIsLoading}) {
             setIsLoading(true);
             return
         }
-        if(loading === false) {
+        if (loading === false) {
             setIsLoading(false);
         }
         if (user) navigate("/dashboard");
@@ -57,6 +57,9 @@ function Reset({isLoading, setIsLoading}) {
                             </Form.Group>
                             <Button variant="secondary" type="submit" className='Button-Register'>Send password reset
                                 email</Button>
+                            <p>Already have account? <LinkContainer to={'/login'}>
+                                <a>Login</a>
+                            </LinkContainer></p>
                             <p>Not a member? <LinkContainer to="/register"><a>Register</a></LinkContainer></p>
                         </Form>
                     </MDBCard>

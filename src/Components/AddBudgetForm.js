@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {MDBCard} from "mdb-react-ui-kit";
 import {Button, FloatingLabel, Form} from "react-bootstrap";
 import {createBudget} from "./Database-Components/CreateBudget";
+import BudgetAlert from "./BudgetAlert";
 
 function AddBudgetForm({
                            user,
@@ -14,11 +15,20 @@ function AddBudgetForm({
                            budgetName,
                            budgetAmount,
                            totalBudget,
-                           setTotalBudget})
-{
+                           setTotalBudget
+                       }) {
     const [validated, setValidated] = useState(false);
 
     const [selectedCategory, setSelectedCategory] = useState("Other");
+
+    const [showBudgetAlert, setShowBudgetAlert] = useState(false);
+
+    const handleAlertShow = () => {
+        setShowBudgetAlert(true);
+        setTimeout(() => {
+            setShowBudgetAlert(false);
+        }, 2500);
+    }
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -26,9 +36,13 @@ function AddBudgetForm({
             event.preventDefault();
             event.stopPropagation();
         } else {
-            createBudget(user, budgetName, setBudgets, budgetAmount, budgets, addBudget, setAddBudget, selectedCategory, totalBudget);
+            if (budgetAmount > totalBudget) {
+                handleAlertShow();
+                return;
+            } else {
+                createBudget(user, budgetName, setBudgets, budgetAmount, budgets, addBudget, setAddBudget, selectedCategory, totalBudget);
+            }
         }
-
         setValidated(true);
     };
 
@@ -85,6 +99,7 @@ function AddBudgetForm({
                             Please provide a valid total amount.
                         </Form.Control.Feedback>
                     </FloatingLabel>
+                    {showBudgetAlert && <BudgetAlert/>}
                     <Button variant={"success"} type={"submit"} className={'btn-submit'}>Add Budget</Button>
                     <Button variant={"danger"} onClick={() => setAddBudget(!addBudget)}
                             className={'btn-cancel'}>Cancel</Button>

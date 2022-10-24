@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {auth, fetchDataToDB, logout} from "../firebase-config";
 import {fetchUserName} from "./Database-Components/FetchUserData";
 import {fetchBudgets} from "./Database-Components/FetchBudgets";
-import {Button} from "react-bootstrap";
+import {Button, ProgressBar} from "react-bootstrap";
 import AddBudgetForm from "./AddBudgetForm";
 import DeleteBudgetForm from "./DeleteBudgetForm";
 import EditBudgetForm from "./EditBudgetForm";
@@ -86,6 +86,7 @@ function Dashboard({isLoading, setIsLoading}) {
                                 <MDBCard>
                                     <p className={'Budget-Name'}>{budget.name}</p>
                                     <p className={'Budget-Category'}>{budget.category}</p>
+                                    <p className={'Budget-Bar'}><ProgressBar animated now={budget.amount} max={budget.totalBudget}></ProgressBar></p>
                                     <p className={'Budget-Amount'}>{budget.amount}/{budget.totalBudget}</p>
                                 </MDBCard>
                             </div>

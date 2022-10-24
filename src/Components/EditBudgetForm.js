@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {Button, FloatingLabel, Form} from "react-bootstrap";
 import {updateBudget} from "./Database-Components/UpdateBudget";
 import {MDBCard} from "mdb-react-ui-kit";
+import {Alert} from "@mui/material";
+import BudgetAlert from "./BudgetAlert";
 
 
 function EditBudgetForm({
@@ -24,6 +26,8 @@ function EditBudgetForm({
 
     const [selectedCategory, setSelectedCategory] = useState(budgets[0].category);
 
+    const [showBudgetAlert, setShowBudgetAlert] = useState(false);
+
     const handleNoChange = () => {
         budgets.map((budget) => {
             if (budget.name === selectedBudget) {
@@ -36,6 +40,12 @@ function EditBudgetForm({
         })
     }
 
+    const handleAlertShow = () => {
+        setShowBudgetAlert(true);
+        setTimeout(() => {
+            setShowBudgetAlert(false);
+        }, 2500);
+    }
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -43,8 +53,14 @@ function EditBudgetForm({
             event.preventDefault();
             event.stopPropagation();
         } else {
+            handleAlertShow();
             event.preventDefault();
-            updateBudget(user, budgetName, setBudgets, selectedCategory, budgetAmount, selectedBudget, setEditBudget, totalBudget);
+            if(budgetAmount > totalBudget){
+                handleAlertShow();
+                return;
+            } else {
+                updateBudget(user, budgetName, setBudgets, selectedCategory, budgetAmount, selectedBudget, setEditBudget, totalBudget);
+            }
         }
         setValidated(true);
     };
@@ -52,7 +68,6 @@ function EditBudgetForm({
     useEffect(() => {
         handleNoChange();
     }, [selectedBudget]);
-
 
     return (<div className={'Dashboard-EditBudget-Form'}>
         <MDBCard>
@@ -124,6 +139,7 @@ function EditBudgetForm({
                                     Please provide a new amount.
                                 </Form.Control.Feedback>
                             </FloatingLabel>
+                            {showBudgetAlert && <BudgetAlert/>}
                             <Button variant={"success"} type={"submit"} className={'btn-edit'}>Edit Budget</Button>
                             <Button variant={"danger"} onClick={() => setEditBudget(!editBudget)}
                                     className={'btn-cancel'}>Cancel</Button>

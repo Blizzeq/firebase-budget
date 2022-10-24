@@ -337,9 +337,21 @@ body {
 
     }
 
-    .Budget-Amount, .Budget-Category {
+    .Budget-Category, .Budget-Amount {
       @extend %teskt;
       font-family: 'Cera Pro Medium', serif;
+    }
+
+    .Budget-Bar{
+        font-family: 'Cera Pro Medium', serif;
+      .progress{
+        height: 1.5rem;
+        border-radius: 1rem;
+      }
+        .progress-bar{
+          background-color: $main_color;
+          font-size: 1.5rem;
+        }
     }
   }
 }
@@ -350,6 +362,18 @@ body {
   justify-content: center;
   align-items: center;
   font-size: 2.5rem;
+}
+
+.Alert-Budget{
+  font-family: 'Cera Pro Medium', serif;
+  margin-bottom: 1rem;
+  .css-1pxa9xg-MuiAlert-message{
+    font-size: 1.35rem;
+  }
+}
+
+.Summary{
+  font-family: "Cera Pro Medium", serif;
 }
 
 

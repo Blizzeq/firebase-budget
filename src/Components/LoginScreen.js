@@ -28,7 +28,7 @@ const LoginScreen = ({isLoading, setIsLoading}) =>  {
         }
 
         if (user){
-            navigate("/dashboard")
+            navigate("/dashboard", { replace: true });
         }
     }, [user, loading, navigate]);
 

@@ -19,7 +19,7 @@ export const createBudget = async (user, budgetName, setBudgets, budgetAmount, b
                 amount: budgetAmount,
                 totalBudget: totalBudget
             });
-            setBudgets([...budgets, {name: budgetName, amount: budgetAmount, category: category, totalBudget: totalBudget}]);
+            setBudgets([...budgets, {name: budgetName, amount: budgetAmount, category: category, totalBudget: totalBudget, budgetId: uuid(), uid: user.uid}]);
         } else {
             alert("Budget name already exists");
         }
