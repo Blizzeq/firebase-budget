@@ -1,7 +1,7 @@
 
 # Budget-App
 
-App for managing your budgets
+An app to manage your budgets
 
 
 ## Demo
