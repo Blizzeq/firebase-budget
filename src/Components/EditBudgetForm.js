@@ -71,6 +71,7 @@ function EditBudgetForm({
 
     return (<div className={'Dashboard-EditBudget-Form'}>
         <MDBCard>
+            {showBudgetAlert && <BudgetAlert/>}
             <Form noValidate validated={validated} onSubmit={handleSubmit} className={"editBudgetForm"}>
                 <p className={'edit-info'}>Select budget</p>
                 <Form.Select aria-label="Default select example" value={selectedBudget}
@@ -139,7 +140,6 @@ function EditBudgetForm({
                                     Please provide a new amount.
                                 </Form.Control.Feedback>
                             </FloatingLabel>
-                            {showBudgetAlert && <BudgetAlert/>}
                             <Button variant={"success"} type={"submit"} className={'btn-edit'}>Edit Budget</Button>
                             <Button variant={"danger"} onClick={() => setEditBudget(!editBudget)}
                                     className={'btn-cancel'}>Cancel</Button>

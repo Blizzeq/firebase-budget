@@ -21,14 +21,14 @@ function Summary({budgets}) {
         <div className={'Summary'}>
             <MDBFooter className='text-center text-white' style={{ backgroundColor: '#1c1c1c' }}>
                 <MDBContainer className='p-4 pb-0'>
-                    <section className=''>
-                        <p className='d-flex justify-content-center align-items-center'>Total budget: {totalBudget}</p>
+                    <section>
+                        <p className='d-flex justify-content-center align-items-center budget-total'>Total budget: {totalBudget}</p>
                     </section>
                 </MDBContainer>
 
                 <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
                     © 2022 Copyright:
-                    <a className='text-white' href='https://github.com/Blizzeq'>
+                    <a className='text-white ms-2' href='https://github.com/Blizzeq'>
                         Jakub Krasuski
                     </a>
                 </div>

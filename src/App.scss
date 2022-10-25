@@ -28,6 +28,15 @@
   src: url('./assets/cera pro font/Cera Pro Regular Italic.ttf') format('truetype');
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 $dark_color: #262626;
 $light_color: #FBFBFB;
 $main_color: #B23CFD;
@@ -39,6 +48,7 @@ body {
 
 
 .Home-Container {
+  animation: 2s cubic-bezier(0.17, 0.55, 0.55, 1) 0s 1 fadeIn;
 
   min-height: 100vh;
 
@@ -77,6 +87,7 @@ body {
 }
 
 .Register-Container {
+  animation: 1s cubic-bezier(0.17, 0.55, 0.55, 1) 0s 1 fadeIn;
   min-height: 100vh;
   font-family: 'Cera Pro Medium', serif;
   margin-inline: 5vw;
@@ -113,6 +124,7 @@ body {
 }
 
 .Login-Container {
+  animation: 1s cubic-bezier(0.17, 0.55, 0.55, 1) 0s 1 fadeIn;
   min-height: 100vh;
   font-family: 'Cera Pro Medium', serif;
   margin-inline: 5vw;
@@ -123,6 +135,7 @@ body {
   }
 
   .Form-Contact {
+    animation: 1s cubic-bezier(0.17, 0.55, 0.55, 1) 0s 1 fadeIn;
     margin-block: 1.75rem;
     margin-inline: 2rem;
     display: grid;
@@ -161,7 +174,7 @@ body {
 
 .Dashboard {
   .Dashboard-Header {
-    //display on right
+    animation: 1s cubic-bezier(0.17, 0.55, 0.55, 1) 0s 1 fadeIn;
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
@@ -171,6 +184,7 @@ body {
   }
 
   .Dashboard-Menu {
+    animation: 1s cubic-bezier(0.17, 0.55, 0.55, 1) 0s 1 fadeIn;
     .Dashboard-AddBudget {
       @extend %Dashboard-Budget;
 
@@ -182,6 +196,7 @@ body {
     }
 
     .Dashboard-AddBudget-Form {
+      animation: 1s cubic-bezier(0.17, 0.55, 0.55, 1) 0s 1 fadeIn;
       font-family: 'Cera Pro Medium', serif;
       margin-top: 3rem;
       margin-inline: 5vw;
@@ -230,6 +245,7 @@ body {
     }
 
     .Dashboard-DeleteBudget-Form {
+      animation: 1s cubic-bezier(0.17, 0.55, 0.55, 1) 0s 1 fadeIn;
       font-family: 'Cera Pro Medium', serif;
       margin-top: 3rem;
       margin-inline: 5vw;
@@ -278,6 +294,7 @@ body {
   }
 
   .Dashboard-EditBudget-Form {
+    animation: 1s cubic-bezier(0.17, 0.55, 0.55, 1) 0s 1 fadeIn;
     font-family: 'Cera Pro Medium', serif;
     margin-top: 3rem;
     margin-inline: 5vw;
@@ -316,6 +333,7 @@ body {
   }
 
   .Dashboard-Budget{
+    animation: 1s cubic-bezier(0.17, 0.55, 0.55, 1) 0s 1 fadeIn;
     color: $dark_color;
     margin: 7vh 10vw;
 
@@ -365,10 +383,13 @@ body {
 }
 
 .Alert-Budget{
+  position: sticky;
+  top: 2rem;
+  z-index: 100;
   font-family: 'Cera Pro Medium', serif;
   margin-bottom: 1rem;
   .css-1pxa9xg-MuiAlert-message{
-    font-size: 1.35rem;
+    font-size: 1rem;
   }
 }
 
@@ -377,3 +398,98 @@ body {
 }
 
 
+@media screen and (min-width: 768px) {
+  .Dashboard-Header{
+    gap: 1rem;
+    margin: 1rem;
+    font-size: 1.75rem;
+    .btn{
+        font-size: 1.15rem;
+    }
+  }
+  .Dashboard-Menu{
+    .Dashboard-AddBudget{
+        .btn{
+            font-size: 2rem !important;
+            padding: 0.5rem 1.45rem !important;
+        }
+      span{
+        font-size: 2rem;
+      }
+    }
+
+    .Dashboard-DeleteBudget{
+      .btn{
+        font-size: 2rem !important;
+        padding: 0.5rem 1.65rem !important;
+      }
+      span{
+        font-size: 2rem;
+      }
+    }
+
+    .Dashboard-EditBudget{
+      .btn{
+        font-size: 2rem !important;
+        padding: 0.5rem 1rem !important;
+      }
+      span{
+        font-size: 2rem;
+      }
+    }
+
+  }
+}
+
+@media screen and (min-width: 1024px) {
+
+  .Home-Container{
+    overflow: hidden;
+    .Home-Title{
+      margin-top: 7vh;
+      font-size: 3rem;
+    }
+
+    .Home-Subtitle{
+        font-size: 2rem;
+        margin-top: 8vh;
+    }
+
+    .Home-Text{
+        margin-top: 10vh;
+        font-size: 2.5rem;
+    }
+  }
+
+  .Home-Login-Button{
+    .btn{
+      font-size: 1.5rem !important;
+    }
+  }
+
+  .Login-Container{
+    margin-inline: 35vw;
+  }
+
+  .Register-Container{
+    margin-inline: 35vw;
+  }
+
+  .Dashboard-AddBudget-Form, .Dashboard-DeleteBudget-Form, .Dashboard-EditBudget-Form{
+    margin-inline: 35vw !important;
+  }
+
+  .Dashboard-Budget{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3vw;
+  }
+
+  .Summary{
+    position: sticky;
+    bottom: 0;
+    min-width: 100%;
+    margin-top: 50vh !important;
+  }
+
+}

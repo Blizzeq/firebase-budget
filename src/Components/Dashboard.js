@@ -80,18 +80,20 @@ function Dashboard({isLoading, setIsLoading}) {
                                 <Button variant={"warning"} onClick={() => setEditBudget(!editBudget)}>✎</Button> <span>Edit existing Budget</span>
                             </div>]}
                     </div>
-                    {budgets.length !== 0 &&
-                        [budgets.map((budget, index) => {
-                            return <div className={"Dashboard-Budget"} key={index}>
-                                <MDBCard>
+                    <div className={"Dashboard-Budget"}>
+                        {budgets.length !== 0 &&
+                            [budgets.map((budget, index) => {
+                                return <MDBCard key={index}>
                                     <p className={'Budget-Name'}>{budget.name}</p>
                                     <p className={'Budget-Category'}>{budget.category}</p>
-                                    <p className={'Budget-Bar'}><ProgressBar animated now={budget.amount} max={budget.totalBudget}></ProgressBar></p>
+                                    <p className={'Budget-Bar'}><ProgressBar animated now={budget.amount}
+                                                                             max={budget.totalBudget}></ProgressBar></p>
                                     <p className={'Budget-Amount'}>{budget.amount}/{budget.totalBudget}</p>
                                 </MDBCard>
-                            </div>
-                        })]
-                    }
+
+                            })]
+                        }
+                    </div>
                     <Summary budgets={budgets}/>
                 </div>
             }

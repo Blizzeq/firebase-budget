@@ -49,6 +49,7 @@ function AddBudgetForm({
     return (
         <div className={"Dashboard-AddBudget-Form"}>
             <MDBCard>
+                {showBudgetAlert && <BudgetAlert/>}
                 <Form noValidate validated={validated} onSubmit={handleSubmit} className={"createBudgetForm"}>
                     <p className={'edit-info'}>Enter budget name</p>
                     <FloatingLabel
@@ -99,7 +100,6 @@ function AddBudgetForm({
                             Please provide a valid total amount.
                         </Form.Control.Feedback>
                     </FloatingLabel>
-                    {showBudgetAlert && <BudgetAlert/>}
                     <Button variant={"success"} type={"submit"} className={'btn-submit'}>Add Budget</Button>
                     <Button variant={"danger"} onClick={() => setAddBudget(!addBudget)}
                             className={'btn-cancel'}>Cancel</Button>
