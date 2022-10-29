@@ -17,7 +17,7 @@ const registerScreenValidation = yup.object().shape({
 
 const addBudgetValidation = yup.object().shape({
     BudgetName: yup.string().required("Budget name is required.")
-}
+});
 
-export {loginScreenValidation, resetPasswordValidation, registerScreenValidation};
+export {loginScreenValidation, resetPasswordValidation, registerScreenValidation, addBudgetValidation};
 
