@@ -6,10 +6,12 @@ import {Button, Form} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
 import {MDBCard} from "mdb-react-ui-kit";
 import LoadingScreen from "./LoadingScreen";
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
+import {resetPasswordValidation} from "./FormValidation";
 
 function Reset({isLoading, setIsLoading}) {
 
-    const [email, setEmail] = useState("");
     const [user, loading] = useAuthState(auth);
     const navigate = useNavigate();
     useEffect(() => {
@@ -25,35 +27,23 @@ function Reset({isLoading, setIsLoading}) {
 
     const form = useRef();
 
-    const [validated, setValidated] = useState(false);
+    const {register, handleSubmit, formState: {errors}} = useForm({
+        resolver: yupResolver(resetPasswordValidation)
+    });
 
-    const handleSubmit = (e) => {
-        const form = e.currentTarget;
-        if (form.checkValidity() === false) {
-            e.preventDefault();
-            e.stopPropagation();
-        } else {
-            e.preventDefault();
-            sendPasswordReset(email);
-        }
-
-        setValidated(true);
-    };
+    const onSubmit = (data) => {
+        sendPasswordReset(data.Email);
+    }
 
     return (
         <>
             {isLoading ? <LoadingScreen/> :
                 <div className={"Login-Container"}>
                     <MDBCard>
-                        <Form noValidate validated={validated} ref={form} onSubmit={handleSubmit}
-                              className={'Form-Contact'}>
-
+                        <Form ref={form} onSubmit={handleSubmit(onSubmit)} className={'Form-Contact'}>
                             <Form.Group className="form-content" controlId="formBasicEmail">
-                                <Form.Control required type="email" placeholder="Email" name="user_email" value={email}
-                                              onChange={(e) => setEmail(e.target.value)}/>
-                                <Form.Control.Feedback type="invalid">
-                                    Please provide a valid email.
-                                </Form.Control.Feedback>
+                                <Form.Control type="text" placeholder="Email" name="user_email" {...register("Email")}/>
+                                <p>{errors.Email?.message}</p>
                             </Form.Group>
                             <Button variant="secondary" type="submit" className='Button-Register'>Send password reset
                                 email</Button>

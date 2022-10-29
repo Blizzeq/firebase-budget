@@ -2,19 +2,19 @@ import React, {useEffect, useRef, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
-
-import {
-    MDBCard
-} from 'mdb-react-ui-kit';
+import { MDBCard } from 'mdb-react-ui-kit';
 import {LinkContainer} from "react-router-bootstrap";
 import {Button, Form} from "react-bootstrap";
 import LoadingScreen from "./LoadingScreen";
+import {yupResolver} from "@hookform/resolvers/yup";
+import {useForm} from "react-hook-form";
+import {loginScreenValidation} from "./FormValidation";
 
 const LoginScreen = ({isLoading, setIsLoading}) =>  {
 
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    // const [email, setEmail] = useState("");
+    // const [password, setPassword] = useState("");
     const [user, loading] = useAuthState(auth);
     const navigate = useNavigate();
     useEffect(() => {
@@ -34,43 +34,30 @@ const LoginScreen = ({isLoading, setIsLoading}) =>  {
 
     const form = useRef();
 
-    const [validated, setValidated] = useState(false);
+    const {register, handleSubmit, formState: {errors}} = useForm({
+        resolver: yupResolver(loginScreenValidation)
+    });
 
-    const handleSubmit = (e) => {
-        const form = e.currentTarget;
-        if (form.checkValidity() === false) {
-            e.preventDefault();
-            e.stopPropagation();
-        } else {
-            e.preventDefault();
-            logInWithEmailAndPassword(email, password);
-        }
+    const onSubmit = (data) => {
+        logInWithEmailAndPassword(data.Email, data.Password);
+    }
 
-        setValidated(true);
-    };
-
-    console.log("Loading " + loading);
 
     return (
         <>
         {isLoading ? <LoadingScreen/> :
                 <div className={"Login-Container"}>
                     <MDBCard>
-                        <Form noValidate validated={validated} ref={form} onSubmit={handleSubmit}
-                              className={'Form-Contact'}>
+                        <Form noValidate  ref={form} onSubmit={handleSubmit(onSubmit)} className={'Form-Contact'}>
 
                             <Form.Group className="form-content" controlId="formBasicEmail">
-                                <Form.Control required type="email" placeholder="Email" name="user_email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-                                <Form.Control.Feedback type="invalid">
-                                    Please provide a valid email.
-                                </Form.Control.Feedback>
+                                <Form.Control required type="text" placeholder="Email" name="user_email" {...register("Email")}/>
+                                <p>{errors.Email?.message}</p>
                             </Form.Group>
 
                             <Form.Group className="form-content" controlId="formBasicPassword">
-                                <Form.Control required type="password" placeholder="Password" name="user_password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-                                <Form.Control.Feedback type="invalid">
-                                    Please provide a valid password.
-                                </Form.Control.Feedback>
+                                <Form.Control required type="password" placeholder="Password" name="user_password" {...register("Password")}/>
+                                <p>{errors.Password?.message}</p>
                             </Form.Group>
                             <LinkContainer to="/reset">
                                 <a>Forgot password?</a>

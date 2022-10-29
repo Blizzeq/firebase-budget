@@ -9,6 +9,9 @@ import {
 import {Button, Form} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
 import LoadingScreen from "./LoadingScreen";
+import {yupResolver} from "@hookform/resolvers/yup";
+import {registerScreenValidation} from "./FormValidation";
+import {useForm} from "react-hook-form";
 
 function RegisterScreen({isLoading, setIsLoading}) {
 
@@ -17,9 +20,7 @@ function RegisterScreen({isLoading, setIsLoading}) {
     const [password, setPassword] = useState("");
     const [user, loading] = useAuthState(auth);
     const navigate = useNavigate();
-    const register = () => {
-        registerWithEmailAndPassword(name, email, password);
-    };
+
     useEffect(() => {
         if (loading) {
             setIsLoading(true);
@@ -33,19 +34,12 @@ function RegisterScreen({isLoading, setIsLoading}) {
 
     const form = useRef();
 
-    const [validated, setValidated] = useState(false);
+    const {register, handleSubmit, formState: {errors}} = useForm({
+        resolver: yupResolver(registerScreenValidation)
+    });
 
-    const handleSubmit = (e) => {
-        const form = e.currentTarget;
-        if (form.checkValidity() === false) {
-            e.preventDefault();
-            e.stopPropagation();
-        } else {
-            e.preventDefault();
-            register();
-        }
-
-        setValidated(true);
+    const onSubmit = async (data) => {
+        registerWithEmailAndPassword(data.Name, data.Email, data.Password);
     };
 
     return (
@@ -53,31 +47,20 @@ function RegisterScreen({isLoading, setIsLoading}) {
             {isLoading ? <LoadingScreen/> :
                 <div className={"Register-Container"}>
                     <MDBCard>
-                        <Form noValidate validated={validated} ref={form} onSubmit={handleSubmit}
-                              className={'Form-Contact'}>
-
+                        <Form ref={form} onSubmit={handleSubmit(onSubmit)} className={'Form-Contact'}>
                             <Form.Group className="form-content" controlId="formBasicName">
-                                <Form.Control required type="name" placeholder="Name" name="user_name" value={name}
-                                              onChange={(e) => setName(e.target.value)}/>
-                                <Form.Control.Feedback type="invalid">
-                                    Please provide a valid name.
-                                </Form.Control.Feedback>
+                                <Form.Control type="name" placeholder="Name" name="user_name" {...register("Name")}/>
+                                <p>{errors.Name?.message}</p>
                             </Form.Group>
 
                             <Form.Group className="form-content" controlId="formBasicEmail">
-                                <Form.Control required type="email" placeholder="Email" name="user_email" value={email}
-                                              onChange={(e) => setEmail(e.target.value)}/>
-                                <Form.Control.Feedback type="invalid">
-                                    Please provide a valid email.
-                                </Form.Control.Feedback>
+                                <Form.Control type="text" placeholder="Email" name="user_email" {...register("Email")}/>
+                                <p>{errors.Email?.message}</p>
                             </Form.Group>
 
                             <Form.Group className="form-content" controlId="formBasicPassword">
-                                <Form.Control required type="password" placeholder="Password" name="user_password"
-                                              value={password} onChange={(e) => setPassword(e.target.value)}/>
-                                <Form.Control.Feedback type="invalid">
-                                    Please provide a valid password.
-                                </Form.Control.Feedback>
+                                <Form.Control type="password" placeholder="Password" name="user_password" {...register("Password")}/>
+                                <p>{errors.Password?.message}</p>
                             </Form.Group>
                             <Button variant="secondary" type="submit" className={'Button-Login'}>
                                 Register

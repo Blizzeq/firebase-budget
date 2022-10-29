@@ -128,7 +128,7 @@ body {
   min-height: 100vh;
   font-family: 'Cera Pro Medium', serif;
   margin-inline: 5vw;
-  padding-top: 30vh;
+  padding-top: 20vh;
 
   .card {
     background-color: $light_color;
@@ -141,6 +141,15 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 1rem;
+
+    .form-content{
+      p{
+        margin-top: .3rem;
+        padding-left: .3rem;
+        text-align: start;
+        color: red;
+      }
+    }
 
     a {
       text-decoration: none;
@@ -473,6 +482,14 @@ body {
 
   .Register-Container{
     margin-inline: 35vw;
+    .form-content{
+      p{
+        margin-top: .3rem;
+        padding-left: .3rem;
+        text-align: start;
+        color: red;
+      }
+    }
   }
 
   .Dashboard-AddBudget-Form, .Dashboard-DeleteBudget-Form, .Dashboard-EditBudget-Form{
