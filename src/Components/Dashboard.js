@@ -54,10 +54,8 @@ function Dashboard({isLoading, setIsLoading}) {
                         {addBudget ?
                             <AddBudgetForm addBudget={addBudget} setAddBudget={setAddBudget} user={user}
                                            budgetName={budgetName}
-                                           setBudgetName={setBudgetName} budgetAmount={budgetAmount}
-                                           setBudgetAmount={setBudgetAmount}
                                            setBudgets={setBudgets}
-                                           budgets={budgets} totalBudget={totalBudget} setTotalBudget={setTotalBudget}/>
+                                           budgets={budgets}/>
                             : <div className={"Dashboard-AddBudget"}>
                                 <Button variant={"success"} onClick={() => setAddBudget(!addBudget)}>+</Button> <span>Add new Budget</span>
                             </div>}

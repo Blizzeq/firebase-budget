@@ -15,9 +15,6 @@ import {useForm} from "react-hook-form";
 
 function RegisterScreen({isLoading, setIsLoading}) {
 
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
     const [user, loading] = useAuthState(auth);
     const navigate = useNavigate();
 
@@ -38,7 +35,7 @@ function RegisterScreen({isLoading, setIsLoading}) {
         resolver: yupResolver(registerScreenValidation)
     });
 
-    const onSubmit = async (data) => {
+    const onSubmit = (data) => {
         registerWithEmailAndPassword(data.Name, data.Email, data.Password);
     };
 

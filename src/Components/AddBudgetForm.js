@@ -3,24 +3,17 @@ import {MDBCard} from "mdb-react-ui-kit";
 import {Button, FloatingLabel, Form} from "react-bootstrap";
 import {createBudget} from "./Database-Components/CreateBudget";
 import BudgetAlert from "./BudgetAlert";
+import {useForm} from "react-hook-form";
+import {addBudgetValidation} from "./FormValidation";
+import {yupResolver} from "@hookform/resolvers/yup";
 
 function AddBudgetForm({
                            user,
                            addBudget,
                            setAddBudget,
                            budgets,
-                           setBudgets,
-                           setBudgetName,
-                           setBudgetAmount,
-                           budgetName,
-                           budgetAmount,
-                           totalBudget,
-                           setTotalBudget
+                           setBudgets
                        }) {
-    const [validated, setValidated] = useState(false);
-
-    const [selectedCategory, setSelectedCategory] = useState("Other");
-
     const [showBudgetAlert, setShowBudgetAlert] = useState(false);
 
     const handleAlertShow = () => {
@@ -30,45 +23,36 @@ function AddBudgetForm({
         }, 2500);
     }
 
-    const handleSubmit = (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
+    const {register, handleSubmit, formState: {errors}} = useForm({
+        resolver: yupResolver(addBudgetValidation)
+    });
+
+    const onSubmit = (data) => {
+        if (data.BudgetAmount > data.TotalBudget) {
+            handleAlertShow();
         } else {
-            if (budgetAmount > totalBudget) {
-                handleAlertShow();
-                return;
-            } else {
-                createBudget(user, budgetName, setBudgets, budgetAmount, budgets, addBudget, setAddBudget, selectedCategory, totalBudget);
-            }
+            createBudget(user, data.BudgetName, setBudgets, data.BudgetAmount, budgets, addBudget, setAddBudget, data.BudgetCategory, data.TotalBudget);
         }
-        setValidated(true);
-    };
+    }
 
     return (
         <div className={"Dashboard-AddBudget-Form"}>
             <MDBCard>
                 {showBudgetAlert && <BudgetAlert/>}
-                <Form noValidate validated={validated} onSubmit={handleSubmit} className={"createBudgetForm"}>
+                <Form onSubmit={handleSubmit(onSubmit)} className={"createBudgetForm"}>
                     <p className={'edit-info'}>Enter budget name</p>
                     <FloatingLabel
                         controlId="floatingBudget"
                         label="Budget Name"
                     >
                         <Form.Control type="text" placeholder="Budget"
-                                      onChange={(e) => setBudgetName(e.target.value)} required/>
-                        <Form.Control.Feedback>
-                            Looks good!
-                        </Form.Control.Feedback>
-                        <Form.Control.Feedback type="invalid">
-                            Please provide a name for your budget.
-                        </Form.Control.Feedback>
+                            {...register("BudgetName")}/>
+                        <p className={"error"}>{errors.BudgetName?.message}</p>
                     </FloatingLabel>
                     <p className={'edit-info'}>Select budget category</p>
                     <Form.Select aria-label="Default select example"
-                                 onChange={(e) => setSelectedCategory(e.target.value)}>
-                        <option>Select category</option>
+                                 {...register("BudgetCategory")}>
+                        <option value={"Other"}>Other</option>
                         <option value={"Housing"}>Housing</option>
                         <option value={"Transportation"}>Transportation</option>
                         <option value={"Food"}>Food</option>
@@ -76,29 +60,19 @@ function AddBudgetForm({
                         <option value={"Insurance"}>Insurance</option>
                         <option value={"Medical/Dental"}>Medical/Dental</option>
                         <option value={"Savings"}>Savings</option>
-                        <option value={"Other"}>Other</option>
                     </Form.Select>
+                    <p className={"error"}>{errors.BudgetCategory?.message}</p>
                     <p className={'edit-info'}>Enter current budget amount</p>
                     <FloatingLabel controlId="floatingAmount" label="Current Amount">
                         <Form.Control type="number" placeholder="Amount"
-                                      onChange={(e) => setBudgetAmount(e.target.valueAsNumber)} required/>
-                        <Form.Control.Feedback>
-                            Looks good!
-                        </Form.Control.Feedback>
-                        <Form.Control.Feedback type="invalid">
-                            Please provide a valid amount.
-                        </Form.Control.Feedback>
+                            {...register("BudgetAmount")}/>
+                        <p className={"error"}>{errors.BudgetAmount?.message}</p>
                     </FloatingLabel>
                     <p className={'edit-info'}>Enter maximum budget amount</p>
                     <FloatingLabel controlId="floatingAmount" label="Maximum Amount">
                         <Form.Control type="number" placeholder="Amount"
-                                      onChange={(e) => setTotalBudget(e.target.valueAsNumber)} required/>
-                        <Form.Control.Feedback>
-                            Looks good!
-                        </Form.Control.Feedback>
-                        <Form.Control.Feedback type="invalid">
-                            Please provide a valid total amount.
-                        </Form.Control.Feedback>
+                            {...register("TotalBudget")}/>
+                        <p className={"error"}>{errors.TotalBudget?.message}</p>
                     </FloatingLabel>
                     <Button variant={"success"} type={"submit"} className={'btn-submit'}>Add Budget</Button>
                     <Button variant={"danger"} onClick={() => setAddBudget(!addBudget)}

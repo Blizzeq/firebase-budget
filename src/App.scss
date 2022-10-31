@@ -238,7 +238,7 @@ body {
 
         .btn-cancel {
           @extend %btn;
-          margin-left: 1.82rem;
+          margin-left: .5rem;
         }
       }
     }
@@ -287,7 +287,6 @@ body {
 
       .btn-cancel {
         @extend %btn;
-        margin-left: 0.37rem;
       }
     }
   }
@@ -336,7 +335,7 @@ body {
 
       .btn-cancel {
         @extend %btn;
-        margin-left: 1.8rem;
+        margin-left: .5rem;
       }
     }
   }
@@ -494,6 +493,12 @@ body {
 
   .Dashboard-AddBudget-Form, .Dashboard-DeleteBudget-Form, .Dashboard-EditBudget-Form{
     margin-inline: 35vw !important;
+    .error{
+        margin-top: .3rem;
+        padding-left: .3rem;
+        text-align: start;
+        color: red;
+    }
   }
 
   .Dashboard-Budget{

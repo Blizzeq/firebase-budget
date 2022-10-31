@@ -16,7 +16,10 @@ const registerScreenValidation = yup.object().shape({
 });
 
 const addBudgetValidation = yup.object().shape({
-    BudgetName: yup.string().required("Budget name is required.")
+    BudgetName: yup.string().required("Budget name is required."),
+    BudgetCategory: yup.string().required("Budget category is required."),
+    BudgetAmount: yup.number().required().typeError("Budget amount is required."),
+    TotalBudget: yup.number().required().typeError("Total budget is required.").min(yup.ref("BudgetAmount"), "Total budget must be greater than current budget amount.")
 });
 
 export {loginScreenValidation, resetPasswordValidation, registerScreenValidation, addBudgetValidation};
