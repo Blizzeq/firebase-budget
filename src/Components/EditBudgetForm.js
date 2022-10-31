@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Button, FloatingLabel, Form} from "react-bootstrap";
 import {updateBudget} from "./Database-Components/UpdateBudget";
 import {MDBCard} from "mdb-react-ui-kit";
-import {Alert} from "@mui/material";
 import BudgetAlert from "./BudgetAlert";
 
 
